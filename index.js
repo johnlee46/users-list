@@ -30,10 +30,10 @@ app.post('/message', (req,res) => {
 
     res.send(ul);
 });*/
-app.get('/users/:name/:description/:url'){
+app.get('/users/:name',(req,res)){
     fs.readFile('users.json', function (err, data) {
         var json = JSON.parse(data)
-        json.push('name: ' + request.params.name)
+        json.push('name: ' + req.params.name)
     
         fs.writeFile("users.json", JSON.stringify(json))
     })
