@@ -1,0 +1,16 @@
+{
+  "artists": {
+    "person": [
+      {
+        "name": "test",
+        "description": "test",
+        "url": "test"
+      },
+      {
+        "name": "test",
+        "description": "test",
+        "url": "test"
+      }
+    ]
+  }
+}
