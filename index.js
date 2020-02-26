@@ -9,14 +9,16 @@ app.use(bodyParser.urlencoded({extended:false}));  // middleware
 
 // parse application/json
 app.use(bodyParser.json()); // middleware
-/*
+
 app.get('/', (req,res) => {
-    res.send(`<form action="/message" method="POST">
-                <input type="text" name="info">
+    res.send(`<form action="/addUser" method="POST">
+                <input type="text" name="name">
+                <input type="text" name="description">
+                <input type="text" name="url">
                 <input value="submit" type="submit" />
                 </form>`
             );	
-});*/
+});
 /*
 app.post('/message', (req,res) => {
     let data = req.body.info;
@@ -31,14 +33,14 @@ app.post('/message', (req,res) => {
 
     res.send(ul);
 });*/
-app.put('/addUser/:name/:description/:url',(req,res) => {
+app.post('/addUser',(req,res) => {
     fs.readFile('users.json', (err, data) =>{
         if (err) throw err;
         json = JSON.parse(data)
         var myObj = {
-            "name": req.params.name,
-            "description":req.params.description,
-            "url": req.params.url
+            "name": req.body.name,
+            "description":req.body.description,
+            "url": req.body.url
         }
         json.artists.push(myObj)
         //res.send((JSON.stringify(myObj)))
