@@ -43,6 +43,19 @@ app.get('/addUser/:name/:description/:url',(req,res) => {
         //res.send((JSON.stringify(myObj)))
     
         fs.writeFile("users.json", JSON.stringify(json))
+        //next();
+        res.send((JSON.stringify(json)))
+    })
+    
+});
+app.get('/deleteUser/:index',(req,res) => {
+    fs.readFile('users.json', (err, data) =>{
+        json = JSON.parse(data)
+        json.artists.splice(req.params.index,1)
+        //res.send((JSON.stringify(myObj)))
+    
+        fs.writeFile("users.json", JSON.stringify(json))
+        //next();
         res.send((JSON.stringify(json)))
     })
     
