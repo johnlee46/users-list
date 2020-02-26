@@ -31,8 +31,9 @@ app.post('/message', (req,res) => {
 
     res.send(ul);
 });*/
-app.get('/addUser/:name/:description/:url',(req,res) => {
+app.put('/addUser/:name/:description/:url',(req,res) => {
     fs.readFile('users.json', (err, data) =>{
+        if (err) throw err;
         json = JSON.parse(data)
         var myObj = {
             "name": req.params.name,
@@ -48,8 +49,9 @@ app.get('/addUser/:name/:description/:url',(req,res) => {
     })
     
 });
-app.get('/deleteUser/:index',(req,res) => {
+app.delete('/deleteUser/:index',(req,res) => {
     fs.readFile('users.json', (err, data) =>{
+        if (err) throw err;
         json = JSON.parse(data)
         json.artists.splice(req.params.index,1)
         //res.send((JSON.stringify(myObj)))
