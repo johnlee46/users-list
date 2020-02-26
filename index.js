@@ -3,6 +3,7 @@ let bodyParser = require('body-parser');
 let app = express();
 const fs = require('fs');
 let people = []
+var json;
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended:false}));  // middleware
 
@@ -30,20 +31,30 @@ app.post('/message', (req,res) => {
 
     res.send(ul);
 });*/
-app.get('/users/:name',(req,res)){
-    fs.readFile('users.json', function (err, data) {
-        var json = JSON.parse(data)
-        json.push('name: ' + req.params.name)
+app.get('/addUser/:name/:description/:url',(req,res) => {
+    fs.readFile('users.json', (err, data) =>{
+        json = JSON.parse(data)
+        var myObj = {
+            "name": req.params.name,
+            "description":req.params.description,
+            "url": req.params.url
+        }
+        json.artists.push(myObj)
+        //res.send((JSON.stringify(myObj)))
     
         fs.writeFile("users.json", JSON.stringify(json))
+        res.send((JSON.stringify(json)))
     })
-}
+    
+});
 app.get('/',(req,res) => {
 
     // **modify your existing code here**
     fs.readFile('users.json', (e, data) => {
         if (e) throw e;
-        res.send(data.toString());
+        json = JSON.parse(data);
+        res.send(JSON.stringify(json))
+        //res.send(data.toString());
     });
     
     //let data = req.body.info;
