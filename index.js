@@ -10,6 +10,8 @@ app.use(bodyParser.urlencoded({extended:false}));  // middleware
 // parse application/json
 app.use(bodyParser.json()); // middleware
 
+
+/*
 app.get('/', (req,res) => {
     res.send(`<form action="/addUser" method="POST">
                 <input type="text" name="name">
@@ -19,20 +21,7 @@ app.get('/', (req,res) => {
                 </form>`
             );	
 });
-/*
-app.post('/message', (req,res) => {
-    let data = req.body.info;
-    people.push(data)
 
-    let ul = "<ul>";
-
-    for(let i=0;i<people.length; i++)
-        ul+="<li>" + people[i] + "</li>";
-
-    ul+="</ul>"
-
-    res.send(ul);
-});*/
 app.post('/addUser',(req,res) => {
     fs.readFile('users.json', (err, data) =>{
         if (err) throw err;
@@ -51,7 +40,26 @@ app.post('/addUser',(req,res) => {
     })
     
 });
-app.delete('/deleteUser/:index',(req,res) => {
+*/ 
+app.get('/addUser/:name/:description/:url',function(req,res) {
+    fs.readFile('users.json', (err, data) =>{
+        if (err) throw err;
+        json = JSON.parse(data)
+        var myObj = {
+            "name": req.params.name,
+            "description":req.params.description,
+            "url": req.params.url
+        }
+        json.artists.push(myObj)
+        //res.send((JSON.stringify(myObj)))
+    
+        fs.writeFile("users.json", JSON.stringify(json))
+        //next();
+        res.send((JSON.stringify(json)))
+    })
+    
+});
+app.get('/deleteUser/:index',function (req,res){
     fs.readFile('users.json', (err, data) =>{
         if (err) throw err;
         json = JSON.parse(data)
@@ -64,7 +72,7 @@ app.delete('/deleteUser/:index',(req,res) => {
     })
     
 });
-app.get('/',(req,res) => {
+app.get('/',function(req,res) {
 
     // **modify your existing code here**
     fs.readFile('users.json', (e, data) => {
