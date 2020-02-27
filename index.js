@@ -41,6 +41,17 @@ app.post('/addUser',(req,res) => {
     
 });
 */ 
+app.post('/submitUser',(req,res) => {
+    let data = req.body;
+        var myObj = {
+            "name": data.name,
+            "description":data.description,
+            "url": data.url
+        }
+        console.log(myObj)
+        users.push(myObj)
+        res.send(users)
+})
 app.get('/addUser/:name/:description/:url',function(req,res) {
         
         
