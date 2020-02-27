@@ -107,7 +107,7 @@ function onLoad(){
     var array;
     fetch('/users').then((res) => res.json()).then((data) => {
         //console.log(data);
-        array = data.artists;
+        array = data;
         console.log(array)
         for (let i = 0; i< array.length;i++){
             console.log(array[i])
