@@ -23,7 +23,7 @@ app.post('/submitUser',(req,res) => {
     fs.readFile('users.json', (e, data) => {
         if (e) throw e;
         json = JSON.parse(data);
-        console.log(json)
+        //console.log(json)
         users = json
     })
     let data = req.body;
@@ -32,7 +32,7 @@ app.post('/submitUser',(req,res) => {
             "description":data.description,
             "url": data.url
         }
-        console.log(myObj)
+        //console.log(myObj)
         users.push(myObj)
         fs.writeFile('users.json',JSON.stringify(users))
         res.send(users)
@@ -40,8 +40,8 @@ app.post('/submitUser',(req,res) => {
 app.get('/deleteUser/:index',function (req,res){
     fs.readFile('users.json', (e, data) => {
         if (e) throw e;
-        json = JSON.parse(data);
-        console.log(json)
+        json = JSON.stringify(data);
+        //console.log(json)
         users = json
     })
     users.splice(req.params.index,1)
@@ -52,7 +52,7 @@ app.get('/users',function(req,res) {
     fs.readFile('users.json', (e, data) => {
         if (e) throw e;
         json = JSON.parse(data);
-        console.log(json)
+        //console.log(json)
         users = json
     })
     json = JSON.stringify(users);
@@ -63,7 +63,7 @@ app.get('/',(req,res) => {
     fs.readFile('users.json', (e, data) => {
         if (e) throw e;
         json = JSON.parse(data);
-        console.log(json)
+        //console.log(json)
         //res.send(data.toString());
     });
     res.sendfile("contacts.html")
