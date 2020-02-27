@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended:false}));  // middleware
 
 // parse application/json
 app.use(bodyParser.json()); // middleware
-
+app.use(express.static('public'))
 
 /*
 app.get('/', (req,res) => {
@@ -72,7 +72,7 @@ app.get('/deleteUser/:index',function (req,res){
     })
     
 });
-app.get('/',function(req,res) {
+app.get('/users',function(req,res) {
 
     // **modify your existing code here**
     fs.readFile('users.json', (e, data) => {
@@ -85,5 +85,7 @@ app.get('/',function(req,res) {
     //let data = req.body.info;
     //res.send(data)
 })
-
+app.get('/',(req,res) => {
+    res.sendfile("contacts.html")
+})
 app.listen(process.env.PORT || 3000);
