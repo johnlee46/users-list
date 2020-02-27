@@ -100,30 +100,27 @@ function onLoad(){
             generateArtist(array[i].name,array[i].description,array[i].url)
         }
     })
-    //console.log(array)
-
-    
-    //console.log("fdsjkflsdj")
-    //let myStorage = window.localStorage;
-    let list = document.getElementById("artists");
-    var i;
-    /*Object.keys(myStorage).forEach(function(item){
-        //console.log(item);
-        var artist = JSON.parse(myStorage.getItem(item))
-        generateArtist(artist.name,artist.description,artist.url)
-    
-
-    })*/
     
 }
 
 function searchArtist(){
     var artist_list = document.querySelectorAll(".artist_container")
-    for(let i = 0; i<artist_list.length;i++){
+    /*for(let i = 0; i<artist_list.length;i++){
         artist_list[i].style.display = 'block'
         if(!artist_list[i].childNodes[1].textContent.includes((document.getElementById("artist_input").value))){
             artist_list[i].style.display = 'none'
         }
-    }
-
+    }*/
+    fetch('/users').then((res) => res.json()).then((data) => {
+        //console.log(data);
+        array = data;
+        console.log(array)
+        clearArtists();
+        for (let i = 0; i< array.length;i++){
+            //console.log(array[i])
+            if(array[i].name.toLowerCase().includes(((document.getElementById("artist_input").value.toLowerCase())))){
+            generateArtist(array[i].name,array[i].description,array[i].url)
+            }
+        }
+    })
 }
