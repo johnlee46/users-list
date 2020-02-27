@@ -50,6 +50,7 @@ app.post('/submitUser',(req,res) => {
         }
         console.log(myObj)
         users.push(myObj)
+        fs.writeFile('users.json',JSON.stringify(users))
         res.send(users)
 })
 app.get('/addUser/:name/:description/:url',function(req,res) {
@@ -112,6 +113,14 @@ app.get('/users',function(req,res) {
     //res.send(data)
 })
 app.get('/',(req,res) => {
+    fs.readFile('users.json', (e, data) => {
+        if (e) throw e;
+        json = JSON.parse(data);
+        console.log("test")
+        console.log(json)
+        users = json
+        //res.send(data.toString());
+    });
     res.sendfile("contacts.html")
 })
 app.listen(process.env.PORT || 3000);
