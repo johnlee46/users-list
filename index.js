@@ -54,14 +54,10 @@ app.delete('/deleteName/:name',(req,res) => {
             users.splice(i,1)
             break;
         }
-        if(users[i].name.isEmpty()){
-            users.splice(i,1)
-            break;
-        }
     }
-
-    fs.writeFile(usersfile,JSON.stringify(users))  
     res.send(users)
+    fs.writeFile(usersfile,JSON.stringify(users))  
+    //res.send(users)
 })
 app.get('/users',function(req,res) {
     loadInFile();
