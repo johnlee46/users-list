@@ -46,7 +46,6 @@ function clearArtists() {
 }
 
 function generateArtist(name, description, url) {
-  let myStorage = window.localStorage;
   let list = document.getElementById("artists");
   let list_item = document.createElement("LI");
   let div_item = document.createElement("div");

@@ -4,10 +4,8 @@ let app = express();
 const fs = require('fs');
 let people = []
 var json;
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended:false}));  // middleware
 
-// parse application/json
 app.use(bodyParser.json()); // middleware
 app.use(express.static('public'))
 
@@ -59,10 +57,10 @@ app.delete('/deleteName/:name',(req,res) => {
         if(users[i].name.toLowerCase() == req.params.name.toLowerCase()){
             console.log(users[i].name.toLowerCase())
             users.splice(i,1)
+            break;
         }
     }
-    //users.splice(req.params.index,1)
-    //console.log(users)
+
     fs.writeFile('users.json',JSON.stringify(users))  
     res.send(users)
 })
@@ -98,9 +96,8 @@ app.get('/',(req,res) => {
     fs.readFile('users.json', (e, data) => {
         if (e) throw e;
         json = JSON.parse(data);
-        //console.log(json)
-        //res.send(data.toString());
+        res.sendfile("contacts.html")
     });
-    res.sendfile("contacts.html")
+    
 })
 app.listen(process.env.PORT || 3000);
