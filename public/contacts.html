@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="css/contacts.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+<script src="js/script.js" defer></script>
+
+<body onload="onLoad()">
+    <div id="main_container">
+
+            <div id="search_container"> 
+                <h1 id="main_header">Artist Directory</h1>
+                <div id ="search_input">
+                <input id="artist_input" type="text">
+                <button id="search_artist_show" onclick="searchArtist()">Search</button>
+                <button id="add_artist_show" onclick="addArtist()">Add Artist</button>
+               
+            </div>
+            </div>
+            <div id="add_artist">
+                <input class = "input_fields" id ="add_name" type="text" name="Name" placeholder="Artist Name"><br>
+                <input  class = "input_fields" id ="add_description" type="text" name="Description" placeholder="About artist "><br>
+                <input  class = "input_fields" id = "add_url" type="text" name="ImageURL" placeholder="Image url"><br>
+                <button id = "submit_artist" onclick ="submitArtist()">Add</button>
+        
+            </div>
+        <ul id="artists">
+
+        </ul>
+    </div>
+</body>
+</html>

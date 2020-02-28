@@ -10,6 +10,7 @@ app.use(bodyParser.json()); // middleware
 app.use(express.static('public'))
 
 var users = [];
+
 fs.readFile(usersfile, (e, data) => {
     if (e) throw e;
     json = JSON.parse(data);
@@ -17,46 +18,43 @@ fs.readFile(usersfile, (e, data) => {
     //res.send(data.toString());
 });
 
-app.post('/submitUser',(req,res) => {
+function loadInFile(){
+    /*
     fs.readFile(usersfile, (e, data) => {
         if (e) throw e;
         json = JSON.parse(data);
-        //console.log(json)
-        users = json
-        let datareq = req.body;
-        var myObj = {
-            "name": datareq.name,
-            "description":datareq.description,
-            "url": datareq.url
-        }
-        //console.log(myObj)
-        users.push(myObj)
-        res.send(users)
-        fs.writeFile(usersfile,JSON.stringify(users))
-        
-    })
+        users = json;
+        //res.send(data.toString());
+    });*/
+}
+
+app.post('/submitUser',(req,res) => {
+    let datareq = req.body;
+    var myObj = {
+        "name": datareq.name,
+        "description":datareq.description,
+        "url": datareq.url
+    }
+    //console.log(myObj)
+    users.push(myObj)
+    res.send(users)
+    fs.writeFile(usersfile,JSON.stringify(users))
 })
 app.get('/deleteUser/:index',function (req,res){
-    fs.readFile(usersfile, (e, data) => {
-        if (e) throw e;
-        json = JSON.stringify(data);
-        //console.log(json)
-        users = json
-    })
+    loadInFile();
     users.splice(req.params.index,1)
     console.log(users)
     fs.writeFile(usersfile,JSON.stringify(users))
 });
 app.delete('/deleteName/:name',(req,res) => {
-    fs.readFile(usersfile, (e, data) => {
-        if (e) throw e;
-        json = JSON.stringify(data);
-        //console.log(json)
-        users = json
-    })
+    loadInFile();
     for(var i in users){
         if(users[i].name.toLowerCase() == req.params.name.toLowerCase()){
             console.log(users[i].name.toLowerCase())
+            users.splice(i,1)
+            break;
+        }
+        if(users[i].name.isEmpty()){
             users.splice(i,1)
             break;
         }
@@ -66,12 +64,7 @@ app.delete('/deleteName/:name',(req,res) => {
     res.send(users)
 })
 app.get('/users',function(req,res) {
-    fs.readFile(usersfile, (e, data) => {
-        if (e) throw e;
-        json = JSON.parse(data);
-        //console.log(json)
-        users = json
-    })
+    loadInFile();
     json = JSON.stringify(users);
     res.send(json)
 
@@ -98,7 +91,7 @@ app.get('/',(req,res) => {
     fs.readFile(usersfile, (e, data) => {
         if (e) throw e;
         json = JSON.parse(data);
-        res.sendfile("contacts.html")
+        res.sendFile(__dirname + "/contacts.html")
     });
     
 })
