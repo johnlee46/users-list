@@ -23,8 +23,7 @@ app.post('/submitUser',(req,res) => {
         json = JSON.parse(data);
         //console.log(json)
         users = json
-    })
-    let data = req.body;
+        let data = req.body;
         var myObj = {
             "name": data.name,
             "description":data.description,
@@ -34,6 +33,8 @@ app.post('/submitUser',(req,res) => {
         users.push(myObj)
         fs.writeFile('users.json',JSON.stringify(users))
         res.send(users)
+    })
+
 })
 app.get('/deleteUser/:index',function (req,res){
     fs.readFile('users.json', (e, data) => {
