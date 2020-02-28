@@ -48,6 +48,24 @@ app.get('/deleteUser/:index',function (req,res){
     console.log(users)
     fs.writeFile('users.json',JSON.stringify(users))
 });
+app.delete('/deleteName/:name',(req,res) => {
+    fs.readFile('users.json', (e, data) => {
+        if (e) throw e;
+        json = JSON.stringify(data);
+        //console.log(json)
+        users = json
+    })
+    for(var i in users){
+        if(users[i].name.toLowerCase() == req.params.name.toLowerCase()){
+            console.log(users[i].name.toLowerCase())
+            users.splice(i,1)
+        }
+    }
+    //users.splice(req.params.index,1)
+    //console.log(users)
+    fs.writeFile('users.json',JSON.stringify(users))  
+    res.send(users)
+})
 app.get('/users',function(req,res) {
     fs.readFile('users.json', (e, data) => {
         if (e) throw e;
@@ -58,6 +76,23 @@ app.get('/users',function(req,res) {
     json = JSON.stringify(users);
     res.send(json)
     
+})
+app.get('/search/:name',(req,res) => {
+    var returnusers = []
+    fs.readFile('users.json', (e, data) => {
+        if (e) throw e;
+        json = JSON.parse(data);
+        for(var i in json){
+           
+            if(JSON.stringify(json[i]).toLowerCase().includes(req.params.name.toLowerCase())){
+                returnusers.push(json[i])
+                console.log(JSON.stringify(json[i]))
+            }
+        }
+        json = returnusers;
+        res.send(json)
+    })
+
 })
 app.get('/',(req,res) => {
     fs.readFile('users.json', (e, data) => {
