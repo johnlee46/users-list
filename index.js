@@ -23,18 +23,17 @@ app.post('/submitUser',(req,res) => {
         json = JSON.parse(data);
         //console.log(json)
         users = json
-        let data = req.body;
+        let datareq = req.body;
         var myObj = {
-            "name": data.name,
-            "description":data.description,
-            "url": data.url
+            "name": datareq.name,
+            "description":datareq.description,
+            "url": datareq.url
         }
         //console.log(myObj)
         users.push(myObj)
         fs.writeFile('users.json',JSON.stringify(users))
         res.send(users)
     })
-
 })
 app.get('/deleteUser/:index',function (req,res){
     fs.readFile('users.json', (e, data) => {
