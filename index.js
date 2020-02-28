@@ -5,12 +5,12 @@ const fs = require('fs');
 let people = []
 var json;
 app.use(bodyParser.urlencoded({extended:false}));  // middleware
-
+const usersfile = "public/users.json"
 app.use(bodyParser.json()); // middleware
 app.use(express.static('public'))
 
 var users = [];
-fs.readFile('users.json', (e, data) => {
+fs.readFile(usersfile, (e, data) => {
     if (e) throw e;
     json = JSON.parse(data);
     users = json;
@@ -18,7 +18,7 @@ fs.readFile('users.json', (e, data) => {
 });
 
 app.post('/submitUser',(req,res) => {
-    fs.readFile('users.json', (e, data) => {
+    fs.readFile(usersfile, (e, data) => {
         if (e) throw e;
         json = JSON.parse(data);
         //console.log(json)
@@ -32,12 +32,12 @@ app.post('/submitUser',(req,res) => {
         //console.log(myObj)
         users.push(myObj)
         res.send(users)
-        //fs.writeFile('users.json',JSON.stringify(users))
+        fs.writeFile(usersfile,JSON.stringify(users))
         
     })
 })
 app.get('/deleteUser/:index',function (req,res){
-    fs.readFile('users.json', (e, data) => {
+    fs.readFile(usersfile, (e, data) => {
         if (e) throw e;
         json = JSON.stringify(data);
         //console.log(json)
@@ -45,10 +45,10 @@ app.get('/deleteUser/:index',function (req,res){
     })
     users.splice(req.params.index,1)
     console.log(users)
-    fs.writeFile('users.json',JSON.stringify(users))
+    fs.writeFile(usersfile,JSON.stringify(users))
 });
 app.delete('/deleteName/:name',(req,res) => {
-    fs.readFile('users.json', (e, data) => {
+    fs.readFile(usersfile, (e, data) => {
         if (e) throw e;
         json = JSON.stringify(data);
         //console.log(json)
@@ -62,24 +62,24 @@ app.delete('/deleteName/:name',(req,res) => {
         }
     }
 
-    fs.writeFile('users.json',JSON.stringify(users))  
+    fs.writeFile(usersfile,JSON.stringify(users))  
     res.send(users)
 })
 app.get('/users',function(req,res) {
-    fs.readFile('users.json', (e, data) => {
+    fs.readFile(usersfile, (e, data) => {
         if (e) throw e;
         json = JSON.parse(data);
         //console.log(json)
         users = json
-        json = JSON.stringify(users);
-        res.send(json)
     })
+    json = JSON.stringify(users);
+    res.send(json)
 
     
 })
 app.get('/search/:name',(req,res) => {
     var returnusers = []
-    fs.readFile('users.json', (e, data) => {
+    fs.readFile(usersfile, (e, data) => {
         if (e) throw e;
         json = JSON.parse(data);
         for(var i in json){
@@ -95,7 +95,7 @@ app.get('/search/:name',(req,res) => {
 
 })
 app.get('/',(req,res) => {
-    fs.readFile('users.json', (e, data) => {
+    fs.readFile(usersfile, (e, data) => {
         if (e) throw e;
         json = JSON.parse(data);
         res.sendfile("contacts.html")
