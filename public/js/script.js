@@ -14,13 +14,13 @@ function addArtist() {
   input_field_url.value = "";
 }
 
-function submitArtist() {
+async function submitArtist() {
   var saveobject = {
     name: document.getElementById("add_name").value,
     description: document.getElementById("add_description").value,
     url: document.getElementById("add_url").value
   };
-  fetch("/submitUser", {
+  await fetch("/submitUser", {
     method: "POST",
     headers: {
       Accept: "application/json",
