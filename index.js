@@ -31,8 +31,9 @@ app.post('/submitUser',(req,res) => {
         }
         //console.log(myObj)
         users.push(myObj)
-        fs.writeFile('users.json',JSON.stringify(users))
         res.send(users)
+        fs.writeFile('users.json',JSON.stringify(users))
+        
     })
 })
 app.get('/deleteUser/:index',function (req,res){
