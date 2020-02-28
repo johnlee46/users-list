@@ -32,7 +32,7 @@ app.post('/submitUser',(req,res) => {
         //console.log(myObj)
         users.push(myObj)
         res.send(users)
-        fs.writeFile('users.json',JSON.stringify(users))
+        //fs.writeFile('users.json',JSON.stringify(users))
         
     })
 })
