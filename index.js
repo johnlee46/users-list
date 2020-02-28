@@ -68,19 +68,18 @@ app.get('/users',function(req,res) {
 })
 app.get('/search/:name',(req,res) => {
     var returnusers = []
-    fs.readFile(usersfile, (e, data) => {
-        if (e) throw e;
-        json = JSON.parse(data);
-        for(var i in json){
-           
-            if(JSON.stringify(json[i]).toLowerCase().includes(req.params.name.toLowerCase())){
-                returnusers.push(json[i])
-                console.log(JSON.stringify(json[i]))
-            }
+    loadInFile();
+    for(var i in users){
+        
+        test = JSON.parse(JSON.stringify(users[i]))
+        if(test.name.toLowerCase().includes(req.params.name.toLowerCase())){
+            returnusers.push(users[i])
+            console.log(JSON.stringify(users[i]))
         }
+    }
         json = returnusers;
         res.send(json)
-    })
+    
 
 })
 app.get('/',(req,res) => {
