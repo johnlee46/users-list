@@ -27,16 +27,17 @@ function submitArtist() {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(saveobject)
-  }).then(res => console.log(res));
+  }).then(res => console.log(res)).then(
 
+  clearArtists()).then(
+  onLoad()
+  );
   let input_field = document.getElementById("add_name");
   let input_field_desc = document.getElementById("add_description");
   let input_field_url = document.getElementById("add_url");
   input_field.value = "";
   input_field_desc.value = "";
   input_field_url.value = "";
-  clearArtists();
-  onLoad();
 }
 function clearArtists() {
   var artist_list = document.querySelectorAll(".artist_container");

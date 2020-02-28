@@ -70,9 +70,10 @@ app.get('/users',function(req,res) {
         json = JSON.parse(data);
         //console.log(json)
         users = json
+        json = JSON.stringify(users);
+        res.send(json)
     })
-    json = JSON.stringify(users);
-    res.send(json)
+
     
 })
 app.get('/search/:name',(req,res) => {
