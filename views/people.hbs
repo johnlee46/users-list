@@ -1,0 +1,5 @@
+<div class="artist_container"><img class="artist_image"
+        src={{people.imageURL}}>
+        <p class="name">{{people.name}}</p><span class="company">{{people.about}}</span>{{#if add_artist}}<button
+        onclick="/delete/{{this.id}}" class="delete_button">Delete</button>{{/if}}
+        </div>

@@ -1,0 +1,14 @@
+            <div id = "login_div">
+            <form id="login" class="product-form" action="/login" method="POST">
+                <label>Member Login</label>
+                <div class="form-control" id = "username">
+                    <input class = "input_fields" type="text" name="username" value='A00911868' placeholder="Username">
+                </div>
+                <div class="form-control" id = "password">
+                    <input class = "input_fields" type="text" name="password" value='password' placeholder="password">
+                </div>
+                    <button id="login_btn" class="btn" type="submit">Login</button>
+            </form>
+            {{#if wrong_password}}Try "A00911868 password"{{/if}}
+
+            </div>

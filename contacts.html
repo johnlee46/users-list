@@ -17,6 +17,21 @@
                
             </div>
             </div>
+            <form class="product-form" action="/peoples/add" method="POST">
+                <div class="form-control">
+                    <label for="title">Name</label>
+                    <input type="text" name="name" value='Josh'>
+                </div>
+                <div class="form-control">
+                    <label for="title">About</label>
+                    <input type="text" name="about" value='Best of the season'>
+                </div>
+                <div class="form-control">
+                    <label for="title">ImageURL</label>
+                    <input type="text" name="imageURL" value='https://randomuser.me/api/portraits/med/men/65.jpg'>
+                    <button class="btn" type="submit">Add People</button>
+                </div>
+            </form>
             <div id="add_artist">
                 <input class = "input_fields" id ="add_name" type="text" name="Name" placeholder="Artist Name"><br>
                 <input  class = "input_fields" id ="add_description" type="text" name="Description" placeholder="About artist "><br>

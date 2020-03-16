@@ -1,0 +1,44 @@
+{{>header}}
+
+    <div id="main_container">
+                {{#if add_artist}}
+            <div id="search_container"> 
+                <h1 id="main_header">Artist Directory</h1>
+                <div id ="search_input">
+                <input id="artist_input" type="text">
+                <button id="search_artist_show" onclick="searchArtist()">Search</button>
+                <button id="add_artist_show" onclick="addArtist()">Add Artist</button>
+               
+            </div>
+            </div>
+        
+            <form id="add_artist" class="product-form" action="/peoples/add" method="POST">
+                <div class="form-control" id = "add_name">
+                    <input type="text" name="name" value='' placeholder="Artist Name">
+                </div>
+                <div class="form-control" id = "add_description">
+                    <input type="text" name="about" value='' placeholder="About artist ">
+                </div>
+                <div class="form-control" id = "add_url">
+                    <input type="text" name="imageURL" value='' placeholder="Image url">
+                    <button class="btn" type="submit">Add People</button>
+                </div>
+            </form>
+            {{/if}}
+        {{{body}}}
+    </div>
+{{#each people}}
+
+
+
+<div class="artist_container">
+    <a href="/people/{{this.id}}">
+    <img class="artist_image"
+        src={{this.imageURL}}><p class="name">{{this.name}}</p> <p class="company">{{this.about}}</p>
+        </a>
+        <a href="/delete/{{this.id}}">
+        <button
+        onclick="/delete/{{this.id}}" class="delete_button">Delete</button>
+        </a></div>
+        
+{{/each}}

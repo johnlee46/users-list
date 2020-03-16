@@ -1,3 +1,5 @@
+
+
 function addArtist() {
   var el = document.getElementById("add_artist");
   el.style.display =
@@ -15,11 +17,14 @@ function addArtist() {
 }
 
 async function submitArtist() {
+    
   var saveobject = {
     name: document.getElementById("add_name").value,
-    description: document.getElementById("add_description").value,
-    url: document.getElementById("add_url").value
+    about: document.getElementById("add_description").value,
+    imageURL: document.getElementById("add_url").value
   };
+  
+  /*
   await fetch("/submitUser", {
     method: "POST",
     headers: {
@@ -31,7 +36,7 @@ async function submitArtist() {
 
   clearArtists()).then(
   onLoad()
-  );
+  );*/
   let input_field = document.getElementById("add_name");
   let input_field_desc = document.getElementById("add_description");
   let input_field_url = document.getElementById("add_url");
@@ -97,10 +102,10 @@ function onLoad() {
     .then(data => {
       //console.log(data);
       array = data;
-      console.log(array);
+      //console.log(array);
       for (let i = 0; i < array.length; i++) {
         //console.log(array[i]);
-        generateArtist(array[i].name, array[i].description, array[i].url);
+        generateArtist(array[i].name, array[i].about, array[i].imageURL);
       }
     });
 }
@@ -117,7 +122,7 @@ function searchArtist() {
       console.log(array);
       clearArtists();
       for (let i = 0; i < array.length; i++) {
-        generateArtist(array[i].name, array[i].description, array[i].url);
+        generateArtist(array[i].name, array[i].about, array[i].imageURL);
       }
     });
 }
